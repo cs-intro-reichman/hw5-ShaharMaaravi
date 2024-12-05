@@ -71,7 +71,7 @@ public class MyString {
         for(int i = 0; i < str.length() - 1; i++) {
             result = result + str.charAt(i) + " "; 
         }
-        result = result + " " + str.charAt(str.length() - 1); 
+        result = result + str.charAt(str.length() - 1); 
         return result;
     }
   
@@ -91,7 +91,7 @@ public class MyString {
         for(int i = 0; i < n; i++){ 
             result = result + ((char) ('A' + (int) (Math.random() * 26)));
         }
-        result.toLowerCase(); 
+        result = result.toLowerCase(); 
         return result;
     }
 
