@@ -41,20 +41,27 @@ public class MyString {
      * @return true is str1 is a subset of str2, false otherwise
      */
     public static boolean subsetOf(String str1, String str2) {
-        int count = 1; 
-        if(str1.isEmpty()) return true; 
-        if(str1.length() > str2.length()) return false;
-        else { 
-            for(int i = 0; i < str2.length(); i++)  { 
-                if(str1.charAt(0) == str2.charAt(i)) {
-                    for(int k = i; k < str1.length(); k++) { 
-                        if(str1.charAt(k) == str2.charAt(k)) count++; 
-                    }
-                }
+        if (str1.isEmpty()) return true;
+        // אם str1 ארוך יותר מ-str2, לא ייתכן שהוא תת-קבוצה
+        if (str1.length() > str2.length()) return false;
+        // הפיכת str2 לרשימה ניתנת לשינוי
+        StringBuilder str2Builder = new StringBuilder(str2);
+        // בדיקה עבור כל תו ב-str1
+        for (int i = 0; i < str1.length(); i++) {
+            char currentChar = str1.charAt(i);
+    
+            // חיפוש התו ב-str2
+            int index = str2Builder.indexOf(String.valueOf(currentChar));
+    
+            if (index == -1) {
+                // התו לא נמצא ב-str2
+                return false;
+            } else {
+                // הסרת התו שנמצא מ-str2
+                str2Builder.deleteCharAt(index);
             }
-            if(count >= str1.length()) return true; 
         }
-        return false;
+        return true;
     }
 
     /** Returns a string which is the same as the given string, with a space
