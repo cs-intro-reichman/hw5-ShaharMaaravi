@@ -20,8 +20,13 @@ public class MyString {
      * @return the number of times c appears in str
      */
     public static int countChar(String str, char ch) {
-        //// Replace the following statement with your code
-        return 0;
+        int count = 0; 
+        for(int i = 0; i < str.length(); i++) {
+            if(str.charAt(i) == ch) {
+                count++;
+            }
+        }
+        return count;
     }
 
     /** Returns true if str1 is a subset string str2, false otherwise
@@ -36,8 +41,27 @@ public class MyString {
      * @return true is str1 is a subset of str2, false otherwise
      */
     public static boolean subsetOf(String str1, String str2) {
-         //// Replace the following statement with your code
-        return false;
+        if (str1.isEmpty()) return true;
+        // אם str1 ארוך יותר מ-str2, לא ייתכן שהוא תת-קבוצה
+        if (str1.length() > str2.length()) return false;
+        // הפיכת str2 לרשימה ניתנת לשינוי
+        StringBuilder str2Builder = new StringBuilder(str2);
+        // בדיקה עבור כל תו ב-str1
+        for (int i = 0; i < str1.length(); i++) {
+            char currentChar = str1.charAt(i);
+    
+            // חיפוש התו ב-str2
+            int index = str2Builder.indexOf(String.valueOf(currentChar));
+    
+            if (index == -1) {
+                // התו לא נמצא ב-str2
+                return false;
+            } else {
+                // הסרת התו שנמצא מ-str2
+                str2Builder.deleteCharAt(index);
+            }
+        }
+        return true;
     }
 
     /** Returns a string which is the same as the given string, with a space
@@ -49,8 +73,13 @@ public class MyString {
      * @return a string consisting of the characters of str, separated by spaces.
      */
     public static String spacedString(String str) {
-        //// Replace the following statement with your code
-        return null;
+        if(str.isEmpty() || str.length() == 1) return str;
+        String result = ""; 
+        for(int i = 0; i < str.length() - 1; i++) {
+            result = result + str.charAt(i) + " "; 
+        }
+        result = result + str.charAt(str.length() - 1); 
+        return result;
     }
   
     /**
@@ -64,8 +93,13 @@ public class MyString {
      * @return a randomly generated string, consisting of 'n' lowercase letters
      */
     public static String randomStringOfLetters(int n) {
-        //// Replace the following statement with your code
-        return null;
+        //if(n < 1) return " ";
+        String result =  ""; 
+        for(int i = 0; i < n; i++){ 
+            result = result + ((char) ('A' + (int) (Math.random() * 26)));
+        }
+        result = result.toLowerCase(); 
+        return result;
     }
 
     /**
@@ -78,8 +112,16 @@ public class MyString {
      * @return a string consisting of str1 minus all the characters of str2
      */
     public static String remove(String str1, String str2) {
-       //// Replace the following statement with your code
-        return null;
+        String result = "";
+        for (int i = 0; i < str1.length(); i++) {
+            char currentChar = str1.charAt(i);
+            if (str2.indexOf(currentChar) == -1) {
+                result = result + (currentChar);
+            } else {
+                str2 = str2.substring(0, str2.indexOf(currentChar)) + str2.substring((str2.indexOf(currentChar)) + 1); 
+            }
+        }
+        return result;
     }
 
     /**
